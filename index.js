@@ -1,17 +1,16 @@
-const express = require('express')
+const express = require("express")
 const app = express()
-const c_main = require('./app/controllers/controller_main')
+
+require('dotenv').config()
+
+app.use(express.urlencoded({extended: false}))
+app.use(express.json())
+
 const cors = require("cors")
-const PORT = 8000
 app.use(cors())
-app.enable("trust proxy")
 
-app.get('/', (req, res) => {
-  res.send('Hello World')
-})
-
-app.use('/api/v1', c_main)
+const PORT = process.env.PORT || 5000
 
 app.listen(PORT, () => {
-  console.log(`✅ Server is running on port ${PORT}`);
+    console.log("Server is running....")
 })
