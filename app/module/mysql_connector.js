@@ -4,11 +4,11 @@ const mysql = require('mysql2');
 function createPool() {
     try {
         const pool = mysql.createPool({
-            host: config["DB_HOST"],
-            port: config["DB_PORT"],
-            user: config["DB_USER"],
-            password: config["DB_PASS"],
-            database: config["DATABASE"],
+            host: process.env.DB_HOST,
+            port: process.env.DB_PORT,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASS,
+            database: process.env.DATABASE,
             connectionLimit: 10,
             waitForConnections: true,
             queueLimit: 0,
