@@ -4,6 +4,7 @@
   "description": "Template node app",
   "main": "index.js",
   "scripts": {
+    "build-sdk": "npm i",
     "start": "node index.js"
   },
   "author": "",
