@@ -6,8 +6,11 @@ const PORT = 8000
 app.use(cors())
 app.enable("trust proxy")
 
+app.get('/', (req, res) => {
+  res.send('Hello World')
+})
 
-app.use('/', c_main)
+app.use('/api/v1', c_main)
 
 app.listen(PORT, () => {
   console.log(`✅ Server is running on port ${PORT}`);
