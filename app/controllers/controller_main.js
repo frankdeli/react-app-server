@@ -11,7 +11,7 @@ const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client("1030264029942-qa9d5psmin15r4lddat1gvuvet9rlfeg.apps.googleusercontent.com");
 
 router.get('/', function(req, res){
-    res.redirect("/app-status")
+    console.log("hai", process.env)
 })
 
 router.post('/login', async function(req, res){
