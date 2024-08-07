@@ -16,7 +16,6 @@ router.get('/', function(req, res){
 
 router.post('/login', async function(req, res){
     try {
-        console.log(req.body)
         if(!req.body.email){
             return res.status(400).json({
                 error: 1,
@@ -36,7 +35,6 @@ router.post('/login', async function(req, res){
         var [getUser, errGet] = await model_user.getByEmail(email)
         if(getUser.length > 0){
             var compare = bcrypt.compareSync(password, getUser[0].password)
-            console.log(compare)
             if(compare){
                 var [insetTr, errInsert] = await model_tr_login.insertTr(email)
                 var access_token = module_credential.generateAccessToken({
@@ -192,7 +190,6 @@ router.post('/login_facebook', async function(req, res){
 
 router.post('/register', async function(req, res){
     try {
-        console.log(req.body)
         if(!req.body.username){
             return res.status(400).json({
                 error: 1,
@@ -308,7 +305,6 @@ router.post('/resend_verify_email', async function(req, res){
 
         var email = req.body.email
         const verificationLink = `http://localhost:5173/verify_email?email=${email}`;
-        console.log(req.body, "wehwew")
         try {
             await sendMail(
             email,
@@ -333,7 +329,6 @@ router.post('/resend_verify_email', async function(req, res){
 
 router.post('/verify_email', async function(req, res){
     try {
-        console.log(req.body)
         if(!req.body.email){
             return res.status(400).json({
                 error: 1,
@@ -380,7 +375,6 @@ router.post('/verify_email', async function(req, res){
 
 router.post('/getUser', async function(req, res){
     try {
-        console.log(req.body)
         if(!req.body.email){
             return res.status(400).json({
                 error: 1,
@@ -412,7 +406,6 @@ router.post('/getUser', async function(req, res){
 
 router.post('/editUser', async function(req, res){
     try {
-        console.log(req.body)
         if(!req.body.username){
             return res.status(400).json({
                 error: 1,
@@ -455,7 +448,6 @@ router.post('/editUser', async function(req, res){
 
 router.post('/resetPassword', async function(req, res){
     try {
-        console.log(req.body)
         if(!req.body.email){
             return res.status(400).json({
                 error: 1,
@@ -532,7 +524,6 @@ router.post('/resetPassword', async function(req, res){
 
 router.post('/getHome', async function(req, res){
     try {
-        console.log(req.body)
         if(!req.body.email){
             return res.status(400).json({
                 error: 1,
