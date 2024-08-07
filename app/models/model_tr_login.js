@@ -42,7 +42,7 @@ module.exports = {
     getLatestData: async function (email) {
         try {
             await mysql.connectAsync()
-            var sql = "SELECT * FROM tr_login WHERE id_tr_login = (SELECT MAX(id_tr_login) as id_tr_login FROM tr_login WHERE email = ?)";
+            var sql = "SELECT * FROM tr_login WHERE id_tr_login = (SELECT id_tr_login FROM tr_login WHERE email = ? ORDER BY id_tr_login DESC LIMIT 1 OFFSET 1)";
             var [result, cache] = await mysql.executeAsync(sql, [email])
             await mysql.endPool()
             return [result, null]
@@ -55,7 +55,7 @@ module.exports = {
     getLoginToday: async function(){
         try {
             await mysql.connectAsync()
-            var sql = "SELECT COUNT(*) as counted FROM tr_login WHERE DATE(sign_in) = CURDATE()";
+            var sql = "SELECT COUNT(DISTINCT email) as counted FROM tr_login WHERE DATE(sign_in) = CURDATE()";
             var [result, cache] = await mysql.executeAsync(sql)
             await mysql.endPool()
             return [result, null]
